@@ -1,0 +1,23 @@
+version: "2"
+services:
+    api:
+        image: win7sama/matchsearchengine:master-1.0.0
+        volumes:
+            - ./data/raw:/raw
+            - ./data/text:/text
+        command: uwsgi --ini search_engine_uwsgi.ini
+    nginx_server:
+        image: nginx
+        volumes:
+            - ./nginx:/project
+            - ./nginx/conf:/etc/nginx/conf.d/
+        ports:
+            - "27658:80"
+        links:
+            - api
+        volumes_from:
+            - static
+    static:
+        image: ubuntu
+        volumes:
+            - ./static:/static
