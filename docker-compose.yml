@@ -1,10 +1,10 @@
 version: "2"
 services:
     api:
-        image: win7sama/matchsearchengine:master-1.0.0
+        image: win7sama/matchsearchengine:master-1.1.0
         volumes:
-            - ./data/raw:/raw
-            - ./data/text:/text
+            - ./data/raw:/project/raw
+            - ./data/text:/project/text
         command: uwsgi --ini search_engine_uwsgi.ini
     nginx_server:
         image: nginx
